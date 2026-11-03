@@ -11,7 +11,7 @@
 --   * The "-- @R01" marker lines are used by benchmarks/run_benchmark.sh.
 -- =====================================================================
 SET search_path TO blinkit;
-BEGIN;
+BEGIN;  
 
 -- @R01
 -- Store assignment: the nearest active dark store within ~3 km of a customer at (12.93, 77.62)
