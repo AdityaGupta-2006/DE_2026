@@ -1,0 +1,27 @@
+=== R23 run 1 ===
+Index Scan using products_sku_key on products  (cost=0.28..8.29 rows=1 width=39) (actual time=0.498..0.499 rows=1.00 loops=1)
+  Index Cond: ((sku)::text = 'BK19787884'::text)
+  Index Searches: 1
+  Buffers: shared hit=1 read=2
+Planning:
+  Buffers: shared hit=99
+Planning Time: 0.405 ms
+Execution Time: 0.528 ms
+=== R23 run 2 ===
+Index Scan using products_sku_key on products  (cost=0.28..8.29 rows=1 width=39) (actual time=0.023..0.023 rows=1.00 loops=1)
+  Index Cond: ((sku)::text = 'BK19787884'::text)
+  Index Searches: 1
+  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=93
+Planning Time: 0.371 ms
+Execution Time: 0.053 ms
+=== R23 run 3 ===
+Index Scan using products_sku_key on products  (cost=0.28..8.29 rows=1 width=39) (actual time=0.022..0.023 rows=1.00 loops=1)
+  Index Cond: ((sku)::text = 'BK19787884'::text)
+  Index Searches: 1
+  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=93
+Planning Time: 0.337 ms
+Execution Time: 0.050 ms

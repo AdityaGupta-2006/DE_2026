@@ -1,0 +1,90 @@
+=== R08 run 1 ===
+Sort  (cost=4867.69..4867.98 rows=118 width=44) (actual time=11.018..12.371 rows=118.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((delivered_at - placed_at) > ((promised_minutes)::double precision * '00:01:00'::interval))))::numeric) / (count(*))::numeric), 1)) DESC
+  Sort Method: quicksort  Memory: 29kB
+  Buffers: shared hit=2218
+  ->  Finalize GroupAggregate  (cost=4836.56..4863.63 rows=118 width=44) (actual time=10.855..12.328 rows=118.00 loops=1)
+        Group Key: store_id
+        Buffers: shared hit=2215
+        ->  Gather Merge  (cost=4836.56..4859.46 rows=201 width=20) (actual time=10.841..12.245 rows=236.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2215
+              ->  Sort  (cost=3836.55..3836.84 rows=118 width=20) (actual time=8.907..8.912 rows=118.00 loops=2)
+                    Sort Key: store_id
+                    Sort Method: quicksort  Memory: 29kB
+                    Buffers: shared hit=2215
+                    Worker 0:  Sort Method: quicksort  Memory: 29kB
+                    ->  Partial HashAggregate  (cost=3831.31..3832.49 rows=118 width=20) (actual time=8.868..8.879 rows=118.00 loops=2)
+                          Group Key: store_id
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=2208
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Seq Scan on orders  (cost=0.00..3752.12 rows=4525 width=24) (actual time=7.247..7.856 rows=3907.50 loops=2)
+                                Filter: ((placed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (placed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'DELIVERED'::text))
+                                Rows Removed by Filter: 71092
+                                Buffers: shared hit=2208
+Planning:
+  Buffers: shared hit=119
+Planning Time: 0.345 ms
+Execution Time: 12.458 ms
+=== R08 run 2 ===
+Sort  (cost=4867.69..4867.98 rows=118 width=44) (actual time=11.506..12.691 rows=118.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((delivered_at - placed_at) > ((promised_minutes)::double precision * '00:01:00'::interval))))::numeric) / (count(*))::numeric), 1)) DESC
+  Sort Method: quicksort  Memory: 29kB
+  Buffers: shared hit=2218
+  ->  Finalize GroupAggregate  (cost=4836.56..4863.63 rows=118 width=44) (actual time=11.372..12.635 rows=118.00 loops=1)
+        Group Key: store_id
+        Buffers: shared hit=2215
+        ->  Gather Merge  (cost=4836.56..4859.46 rows=201 width=20) (actual time=11.360..12.565 rows=236.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2215
+              ->  Sort  (cost=3836.55..3836.84 rows=118 width=20) (actual time=9.294..9.299 rows=118.00 loops=2)
+                    Sort Key: store_id
+                    Sort Method: quicksort  Memory: 29kB
+                    Buffers: shared hit=2215
+                    Worker 0:  Sort Method: quicksort  Memory: 29kB
+                    ->  Partial HashAggregate  (cost=3831.31..3832.49 rows=118 width=20) (actual time=9.255..9.267 rows=118.00 loops=2)
+                          Group Key: store_id
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=2208
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Seq Scan on orders  (cost=0.00..3752.12 rows=4525 width=24) (actual time=7.731..8.384 rows=3907.50 loops=2)
+                                Filter: ((placed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (placed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'DELIVERED'::text))
+                                Rows Removed by Filter: 71092
+                                Buffers: shared hit=2208
+Planning:
+  Buffers: shared hit=119
+Planning Time: 0.365 ms
+Execution Time: 12.779 ms
+=== R08 run 3 ===
+Sort  (cost=4867.69..4867.98 rows=118 width=44) (actual time=10.638..11.754 rows=118.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((delivered_at - placed_at) > ((promised_minutes)::double precision * '00:01:00'::interval))))::numeric) / (count(*))::numeric), 1)) DESC
+  Sort Method: quicksort  Memory: 29kB
+  Buffers: shared hit=2218
+  ->  Finalize GroupAggregate  (cost=4836.56..4863.63 rows=118 width=44) (actual time=10.494..11.692 rows=118.00 loops=1)
+        Group Key: store_id
+        Buffers: shared hit=2215
+        ->  Gather Merge  (cost=4836.56..4859.46 rows=201 width=20) (actual time=10.476..11.612 rows=236.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2215
+              ->  Sort  (cost=3836.55..3836.84 rows=118 width=20) (actual time=8.613..8.618 rows=118.00 loops=2)
+                    Sort Key: store_id
+                    Sort Method: quicksort  Memory: 29kB
+                    Buffers: shared hit=2215
+                    Worker 0:  Sort Method: quicksort  Memory: 29kB
+                    ->  Partial HashAggregate  (cost=3831.31..3832.49 rows=118 width=20) (actual time=8.577..8.588 rows=118.00 loops=2)
+                          Group Key: store_id
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=2208
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Seq Scan on orders  (cost=0.00..3752.12 rows=4525 width=24) (actual time=7.172..7.797 rows=3907.50 loops=2)
+                                Filter: ((placed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (placed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'DELIVERED'::text))
+                                Rows Removed by Filter: 71092
+                                Buffers: shared hit=2208
+Planning:
+  Buffers: shared hit=119
+Planning Time: 0.353 ms
+Execution Time: 11.837 ms
